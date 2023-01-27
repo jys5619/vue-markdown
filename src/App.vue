@@ -1,15 +1,25 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div>
+    <!-- {{  markdown }} -->
+    <textarea v-model="markdown"></textarea>
+    <div v-html="markdownToHtml"></div>
+  </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+// npm i --save-dev @types/marked
+import { marked } from 'marked';
 export default {
   name: 'App',
-  components: {
-    HelloWorld
+  data() {
+    return {
+      markdown: "# hello world"
+    }
+  },
+  computed: {
+    markdownToHtml() {
+      return marked(this.markdown);
+    }
   }
 }
 </script>
@@ -22,5 +32,9 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+textarea {
+  width: 600px;
+  height: 300px;
 }
 </style>
